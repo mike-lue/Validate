@@ -96,13 +96,13 @@ if ($bool) {
  */
 
 require_once "./vendor/autoload.php";
-
+$langErrorMsgFile = '/Lang/en-us/validate.php';// 指定错误信息规则语言文件
+$langErrorMsg = require($langErrorMsgFile);// 获取错误验证规格信息
 $data = ['name' => 'blank', 'age' => 25];   // 验证数据
 $validate = new \EasySwoole\Validate\Validate();
 $validate->addColumn('name')->required();   // 给字段加上验证规则
 $validate->addColumn('age')->required()->max(18);
-$langErrorMsgFile = '/Lang/en-us/validate.php';// 指定错误信息规则语言文件
-$bool = $validate->validate($data,$langErrorMsgFile); // 验证结果
+$bool = $validate->validate($data,$langErrorMsg); // 验证结果
 if ($bool) {
     var_dump("验证通过");
 } else {

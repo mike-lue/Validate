@@ -70,30 +70,17 @@ class Error {
 	 * @param string $errorRuleMsg 触发规则消息
 	 * @param mixed  $errorRuleArg 触发规则参数
 	 */
-	function __construct($field, $fieldData, $fieldAlias, $errorRule, $errorRuleMsg, $errorRuleArg, $langErrorMsgFile = null) {
+	function __construct($field, $fieldData, $fieldAlias, $errorRule, $errorRuleMsg, $errorRuleArg, $langErrorMsg = null) {
 		$this->field = $field;
 		$this->fieldData = $fieldData;
 		$this->fieldAlias = $fieldAlias;
 		$this->errorRule = $errorRule;
 		$this->errorRuleMsg = $errorRuleMsg;
 		$this->errorRuleArg = $errorRuleArg;
-		if ($langErrorMsgFile) {
-			$this->loadLangErrorMsg($langErrorMsgFile);
+		if ($langErrorMsg) {
+			$this->defaultErrorMsg = $langErrorMsg;
 		}
 	}
-
-	/**
-	 * 获取错误消息
-	 * @return [type] [description]
-	 */
-	private function loadLangErrorMsg($langErrorMsgFile): void {
-		if (file_exists($langErrorMsgFile)) {
-			$this->defaultErrorMsg = require $file;
-		} else {
-			throw new \Exception("ErrorMsg file : {$langErrorMsgFile} is miss");
-		}
-	}
-
 	/**
 	 * 获取字段名称
 	 * @return string
