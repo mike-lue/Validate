@@ -1,6 +1,6 @@
 {
-    "name": "wkl/validate",
-    "description": "Multilingual Verifier",
+    "name": "easyswoole/validate",
+    "description": "Easyswoole Multilingual Verifier",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "easyswoole/spl": "^1.0"
     },
     "minimum-stability": "dev",
     "autoload": {
