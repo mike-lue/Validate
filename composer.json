@@ -14,10 +14,8 @@
         "async",
         "easyswoole"
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.1.0",
-        "easyswoole/spl": "^1.0"
     },
     "autoload": {
         "psr-4": {
