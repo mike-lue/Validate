@@ -47,7 +47,7 @@ class Validate {
 	 * @param string $langErrorMsgFile
 	 * @return bool
 	 */
-	function validate(array $data, string $langErrorMsgFile = null) {
+	function validate(array $data, $langErrorMsgFile = null) {
 		$this->verifiedData = [];
 		$spl = new SplArray($data);
 		foreach ($this->columns as $column => $item) {
