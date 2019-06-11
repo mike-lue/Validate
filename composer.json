@@ -1,5 +1,5 @@
 {
-    "name": "easyswoole/validate",
+    "name": "wkl/validate",
     "description": "Easyswoole Multilingual Verifier",
     "license": "MIT",
     "authors": [
@@ -8,10 +8,7 @@
             "email": "luwk@qqty.com"
         }
     ],
-    "require": {
-        "php": ">=7.1.0",
-        "easyswoole/spl": "^1.0"
-    },
+    "require": {},
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
