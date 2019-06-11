@@ -21,8 +21,45 @@ class Error {
 	private $errorRule;
 	private $errorRuleMsg;
 	private $errorRuleArg;
-	private $lang;
-	private $defaultErrorMsg;
+	private $defaultErrorMsg = [
+		'activeUrl' => ':fieldName必须是可访问的网址',
+		'alpha' => ':fieldName只能是字母',
+		'alphaNum' => ':fieldName只能是字母和数字',
+		'alphaDash' => ':fieldName只能是字母数字下划线和破折号',
+		'between' => ':fieldName只能在 :arg0 - :arg1 之间',
+		'bool' => ':fieldName只能是布尔值',
+		'decimal' => ':fieldName只能是小数',
+		'dateBefore' => ':fieldName必须在日期 :arg0 之前',
+		'dateAfter' => ':fieldName必须在日期 :arg0 之后',
+		'equal' => ':fieldName必须等于:arg0',
+		'different' => ':fieldName必须不等于:arg0',
+		'equalWithColumn' => ':fieldName必须等于:arg0的值',
+		'differentWithColumn' => ':fieldName必须不等于:arg0的值',
+		'float' => ':fieldName只能是浮点数',
+		'func' => ':fieldName自定义验证失败',
+		'inArray' => ':fieldName必须在 :arg0 范围内',
+		'integer' => ':fieldName只能是整数',
+		'isIp' => ':fieldName不是有效的IP地址',
+		'notEmpty' => ':fieldName不能为空',
+		'numeric' => ':fieldName只能是数字类型',
+		'notInArray' => ':fieldName不能在 :arg0 范围内',
+		'length' => ':fieldName的长度必须是:arg0',
+		'lengthMax' => ':fieldName长度不能超过:arg0',
+		'lengthMin' => ':fieldName长度不能小于:arg0',
+		'betweenLen' => ':fieldName的长度只能在 :arg0 - :arg1 之间',
+		'money' => ':fieldName必须是合法的金额',
+		'max' => ':fieldName的值不能大于:arg0',
+		'min' => ':fieldName的值不能小于:arg0',
+		'regex' => ':fieldName不符合指定规则',
+		'allDigital' => ':fieldName只能由数字构成',
+		'required' => ':fieldName必须填写',
+		'timestamp' => ':fieldName必须是一个有效的时间戳',
+		'timestampBeforeDate' => ':fieldName必须在:arg0之前',
+		'timestampAfterDate' => ':fieldName必须在:arg0之后',
+		'timestampBefore' => ':fieldName必须在:arg0之前',
+		'timestampAfter' => ':fieldName必须在:arg0之后',
+		'url' => ':fieldName必须是合法的网址',
+	];
 
 	/**
 	 * Error constructor.
@@ -33,27 +70,27 @@ class Error {
 	 * @param string $errorRuleMsg 触发规则消息
 	 * @param mixed  $errorRuleArg 触发规则参数
 	 */
-	function __construct($field, $fieldData, $fieldAlias, $errorRule, $errorRuleMsg, $errorRuleArg, $lang) {
+	function __construct($field, $fieldData, $fieldAlias, $errorRule, $errorRuleMsg, $errorRuleArg, $langErrorMsgFile = null) {
 		$this->field = $field;
 		$this->fieldData = $fieldData;
 		$this->fieldAlias = $fieldAlias;
 		$this->errorRule = $errorRule;
 		$this->errorRuleMsg = $errorRuleMsg;
 		$this->errorRuleArg = $errorRuleArg;
-		$this->lang = $lang;
-		$this->loadErrorMsg();
+		if ($langErrorMsgFile) {
+			$this->loadLangErrorMsg($langErrorMsgFile);
+		}
 	}
 
 	/**
 	 * 获取错误消息
 	 * @return [type] [description]
 	 */
-	private function loadErrorMsg(): void{
-		$file = LANG_PATH . $this->lang . '/validation.php';
-		if (file_exists($file)) {
+	private function loadLangErrorMsg($langErrorMsgFile): void {
+		if (file_exists($langErrorMsgFile)) {
 			$this->defaultErrorMsg = require $file;
 		} else {
-			throw new \Exception("ErrorMsg file : {$file} is miss");
+			throw new \Exception("ErrorMsg file : {$langErrorMsgFile} is miss");
 		}
 	}
 

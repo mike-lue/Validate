@@ -44,10 +44,10 @@ class Validate {
 	/**
 	 * 验证字段是否合法
 	 * @param array $data
-	 * @param string $lang
+	 * @param string $langErrorMsgFile
 	 * @return bool
 	 */
-	function validate(array $data, string $lang) {
+	function validate(array $data, string $langErrorMsgFile = null) {
 		$this->verifiedData = [];
 		$spl = new SplArray($data);
 		foreach ($this->columns as $column => $item) {
@@ -65,7 +65,7 @@ class Validate {
 			}
 			foreach ($rules as $rule => $ruleInfo) {
 				if (!call_user_func([$this, $rule], $spl, $column, $ruleInfo['arg'])) {
-					$this->error = new Error($column, $spl->get($column), $item['alias'], $rule, $ruleInfo['msg'], $ruleInfo['arg'], $lang);
+					$this->error = new Error($column, $spl->get($column), $item['alias'], $rule, $ruleInfo['msg'], $ruleInfo['arg'], $langErrorMsgFile);
 					return false;
 				}
 			}
